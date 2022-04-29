@@ -64,23 +64,12 @@ function App() {
   const submitHandler = (e: any) => {
     e.preventDefault();
     if (randShoe && correctReleaseYearRef.current?.value) {
-      console.log(correctModelRef.current?.value, randShoe?.model);
-      console.log(correctColorwayRef.current?.value, randShoe?.colorway);
-      console.log(correctReleaseYearRef.current?.value, randShoe?.releaseYear);
-      console.log(parseInt(correctReleaseYearRef.current.value) === randShoe.releaseYear);
-
-      // console.log(
-      //   correctModelRef.current?.value.localeCompare(randShoe.model),
-      //   correctColorwayRef.current?.value.localeCompare(randShoe.colorway),
-      //   Number(correctReleaseYearRef.current?.value) === randShoe.releaseYear
-      // );
-
       if (
         correctModelRef.current?.value.localeCompare(randShoe.model) === 0 &&
         correctColorwayRef.current?.value.localeCompare(randShoe.colorway) === 0 &&
         parseInt(correctReleaseYearRef.current.value) === randShoe.releaseYear
       ) {
-        setUserWon(true)
+        setUserWon(true);
       }
     }
   };
@@ -97,7 +86,7 @@ function App() {
 
       <img className="App__image" src={randShoe.imageURL} alt="Jordan" />
 
-          {userWon && <h1>You Won!</h1>}
+      {userWon && <h1>You Won!</h1>}
       <form onSubmit={(e) => submitHandler(e)}>
         <label>Jordan Model</label>
         <select ref={correctModelRef}>
@@ -121,11 +110,10 @@ function App() {
         </select>
         <button>Click</button>
       </form>
-
+{/* 
       <h2>{randShoe.model}</h2>
       <h2>{randShoe.colorway}</h2>
-      <h2>{randShoe.releaseYear}</h2>
-
+      <h2>{randShoe.releaseYear}</h2> */}
     </div>
   );
 }
