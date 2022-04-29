@@ -20,7 +20,7 @@ function App() {
   const correctReleaseYearRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/").then((res) => {
+    axios.get("https://jordle-game.web.app/shoes").then((res) => {
       let newModelList: string[] = [];
       let newColorwayList: string[] = [];
       let newReleaseYearList: number[] = [];
