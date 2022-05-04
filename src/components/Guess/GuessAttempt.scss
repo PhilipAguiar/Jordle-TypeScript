@@ -1,11 +1,18 @@
+@use "../../styles/partials/mixins"as *;
+
 .guess {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0;
+  flex-direction: column;
   margin: 1rem auto;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+  @include tablet {
+    padding: 1rem 0;
+    flex-direction: row;
+  }
 
   &__heading {
     margin: 0;
@@ -29,10 +36,24 @@
     margin: 0 1rem;
     width: 100%;
     flex: 1.5;
+    padding: .5rem 0;
+
+    @include tablet {
+      padding: 0;
+    }
 
     &--middle {
-      border-left: 2px solid lightgray ;
-      border-right: 2px solid lightgray ;
+
+      border-top: 2px solid lightgray;
+      border-bottom: 2px solid lightgray;
+
+      @include tablet {
+        border: none;
+        border-left: 2px solid lightgray;
+        border-right: 2px solid lightgray;
+
+      }
+
     }
 
     &--year {

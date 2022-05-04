@@ -1,8 +1,8 @@
+import * as express from 'express';
 // const SneaksAPI = require("sneaks-api");
 const functions = require("firebase-functions");
 const fs = require("fs");
 const cors = require("cors");
-import * as express from 'express';
 const SneaksAPI = require("sneaks-api");
 const sneaks = new SneaksAPI();
 
