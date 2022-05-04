@@ -18,35 +18,35 @@ type Shoe = {
   imageURL: string;
 };
 
-// let shoeList: Shoe[] = [];
-// let modelNumber: number = 1;
+let shoeList: Shoe[] = [];
+let modelNumber: number = 1;
 
-// for (let i = modelNumber; i <= 26; i++) {
-//   sneaks.getProducts(`Jordan ${i}`, 30, function (err: unknown, products: any) {
-//     if (products) {
-//       products.forEach((product: any) => {
-//         if(product.make && product.releaseDate && product.shoeName && product.thumbnail){
-//           let colorWay: string = product.shoeName.replace(product.make + " ", "");
-//           let releaseYear: number = parseInt(product.releaseDate.split("-")[0]);
+for (let i = modelNumber; i <= 26; i++) {
+  sneaks.getProducts(`Jordan ${i}`, 30, function (err: unknown, products: any) {
+    if (products) {
+      products.forEach((product: any) => {
+        if(product.make && product.releaseDate && product.shoeName && product.thumbnail){
+          let colorWay: string = product.shoeName.replace(product.make + " ", "");
+          let releaseYear: number = parseInt(product.releaseDate.split("-")[0]);
   
-//           let newShoe: Shoe = {
-//             model: product.make,
-//             colorway: colorWay,
-//             releaseYear: releaseYear,
-//             imageURL: product.thumbnail,
-//           };
+          let newShoe: Shoe = {
+            model: product.make,
+            colorway: colorWay,
+            releaseYear: releaseYear,
+            imageURL: product.thumbnail,
+          };
   
-//           if (!shoeList.includes(newShoe) && parseInt(product.make.match(/\d+/g)) === i) {
-//             shoeList.push(newShoe);
-//           }
-//         }
+          if (!shoeList.includes(newShoe) && parseInt(product.make.match(/\d+/g)) === i) {
+            shoeList.push(newShoe);
+          }
+        }
        
-//       });
-//       fs.writeFileSync("../data/shoes.json", JSON.stringify(shoeList));
-//     }
+      });
+      fs.writeFileSync("../data/shoes.json", JSON.stringify(shoeList));
+    }
 
-//   });
-// }
+  });
+}
 
 const getShoes = () => JSON.parse(fs.readFileSync("./data/shoes.json"));
 

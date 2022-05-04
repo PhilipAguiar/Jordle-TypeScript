@@ -67,22 +67,14 @@ function App() {
         colorway: correctColorwayRef.current.value,
         releaseYear: parseInt(correctReleaseYearRef.current.value),
       };
-      setGuessList(prevList=>[...prevList,newGuess])
+      setGuessList(prevList=>[newGuess,...prevList])
 
       if (newGuess.model === answerShoe.model && newGuess.colorway === answerShoe.colorway && newGuess.releaseYear === answerShoe.releaseYear) {
         setUserWon(true);
       }
     }
 
-    // if (randShoe && correctReleaseYearRef.current?.value) {
-    //   if (
-    //     correctModelRef.current?.value.localeCompare(randShoe.model) === 0 &&
-    //     correctColorwayRef.current?.value.localeCompare(randShoe.colorway) === 0 &&
-    //     parseInt(correctReleaseYearRef.current.value) === randShoe.releaseYear
-    //   ) {
-    //     setUserWon(true);
-    //   }
-    // }
+
   };
 
   if (!answerShoe) {
@@ -127,9 +119,9 @@ function App() {
       </form>
 
       {guessList &&
-        guessList.map((guess: Guess) => {
+        guessList.map((guessedShoe: Guess) => {
           return (
-            <GuessAttempt guess= {guess} answerShoe = {answerShoe}/>
+            <GuessAttempt guessedShoe= {guessedShoe} answerShoe = {answerShoe}/>
            
           );
         })}

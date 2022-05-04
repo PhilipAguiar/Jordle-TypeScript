@@ -1,19 +1,57 @@
 import React from "react";
-import { Guess,Shoe } from "../../types";
-import "./GuessAteempt.scss";
+import { Guess, Shoe } from "../../types";
+import "./GuessAttempt.scss";
 
 type Props = {
-  guess: Guess;
-  answerShoe:Shoe;
+  guessedShoe: Guess;
+  answerShoe: Shoe;
 };
 
-function GuessAttempt({ guess,answerShoe }: Props) {
+function GuessAttempt({ guessedShoe, answerShoe }: Props) {
+  const checkIfGreater = (guessedModel: string, answerModel: string) => {
+    let guessedModelNumber: number = parseInt(guessedModel.replace(/[^0-9]/g, ""));
+    let guessedAnswerNumber: number = parseInt(answerModel.replace(/[^0-9]/g, ""));
+
+    if (guessedModelNumber > guessedAnswerNumber) {
+      return 1;
+    }
+
+    if (guessedModelNumber === guessedAnswerNumber) {
+      return 0;
+    }
+
+    if (guessedModelNumber < guessedAnswerNumber) {
+      return -1;
+    }
+  };
+
   return (
-    <div className="guess">
-      <h2 className={`guess__heading ${guess.model!==answerShoe.model && "guess__heading--wrong"}`}>{guess.model}</h2>
-      <h2 className={`guess__heading ${guess.colorway!==answerShoe.colorway && "guess__heading--wrong"}`}>{guess.colorway}</h2>
-      <h2 className={`guess__heading ${guess.releaseYear!==answerShoe.releaseYear && "guess__heading--wrong"}`}>{guess.releaseYear}</h2>
-    </div>
+    <section className="guess">
+      <div className="guess__field-container">
+        <h2 className={`guess__heading ${guessedShoe.model !== answerShoe.model && "guess__heading--wrong"}`}>{guessedShoe.model}</h2>
+
+        {checkIfGreater(guessedShoe.model, answerShoe.model) === 1 ? (
+          <p className="guess__arrow">⬇️</p>
+        ) : (
+          checkIfGreater(guessedShoe.model, answerShoe.model) === -1 && <p className="guess__arrow">⬆️</p>
+        )}
+      </div>
+
+      <div className="guess__field-container">
+        <h2 className={`guess__heading ${guessedShoe.colorway !== answerShoe.colorway && "guess__heading--wrong"}`}>{guessedShoe.colorway}</h2>
+      </div>
+
+      <div className="guess__field-container guess__field-container--year">
+        <h2 className={`guess__heading ${guessedShoe.releaseYear !== answerShoe.releaseYear && "guess__heading--wrong"}`}>
+          {guessedShoe.releaseYear}
+        </h2>
+        {guessedShoe.releaseYear > answerShoe.releaseYear ? (
+          <p className="guess__arrow">⬇️</p>
+        ) : (
+          guessedShoe.releaseYear < answerShoe.releaseYear && <p className="guess__arrow">⬆️</p>
+        )}
+      </div>
+    </section>
   );
 }
 
