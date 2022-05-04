@@ -20,25 +20,24 @@ function App() {
   const correctReleaseYearRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
-    axios.get("https://jordle-game.web.app/shoes").then((res) => {
+    axios.get("http://localhost:5010/shoes").then((res) => {
+      console.log(res)
       let newModelList: string[] = [];
       let newColorwayList: string[] = [];
       let newReleaseYearList: number[] = [];
 
-      res.data.forEach((shoe: any) => {
-        if (!newModelList.includes(shoe.make)) {
-          newModelList.push(shoe.make);
+      res.data.forEach((shoe: Shoe) => {
+        
+        if (!newModelList.includes(shoe.model)) {
+          newModelList.push(shoe.model);
         }
 
-        let colorWay = shoe.shoeName.replace(shoe.make, "");
-
-        if (!newColorwayList.includes(colorWay)) {
-          newColorwayList.push(colorWay);
+        if (!newColorwayList.includes(shoe.colorway)) {
+          newColorwayList.push(shoe.colorway);
         }
 
-        let releaseYear = shoe.releaseDate.split("-")[0];
-        if (!newReleaseYearList.includes(releaseYear)) {
-          newReleaseYearList.push(releaseYear);
+        if (!newReleaseYearList.includes(shoe.releaseYear)) {
+          newReleaseYearList.push(shoe.releaseYear);
         }
       });
 
@@ -47,17 +46,17 @@ function App() {
       setReleaseYearList(newReleaseYearList);
 
       let ranNum: number = Math.floor(Math.random() * res.data.length);
-      let colorWay: string = res.data[ranNum].shoeName.replace(res.data[ranNum].make + " ", "");
-      let releaseYear: number = parseInt(res.data[ranNum].releaseDate.split("-")[0]);
+     
 
       let newShoe: Shoe = {
-        model: res.data[ranNum].make,
-        colorway: colorWay,
-        releaseYear: releaseYear,
-        imageURL: res.data[ranNum].thumbnail,
+        model: res.data[ranNum].model,
+        colorway: res.data[ranNum].colorway,
+        releaseYear: res.data[ranNum].releaseYear,
+        imageURL: res.data[ranNum].imageURL,
       };
 
       setRandShoe(newShoe);
+      console.log(newShoe.model,newShoe.colorway,newShoe.releaseYear)
     });
   }, []);
 
@@ -110,7 +109,11 @@ function App() {
         </select>
         <button>Click</button>
       </form>
+
+    
 {/* 
+
+
       <h2>{randShoe.model}</h2>
       <h2>{randShoe.colorway}</h2>
       <h2>{randShoe.releaseYear}</h2> */}

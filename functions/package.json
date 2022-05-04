@@ -19,7 +19,8 @@
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.20.1",
     "fs": "^0.0.1-security",
-    "sneaks-api": "^1.2.3"
+    "sneaks-api": "^1.2.3",
+    "stockx-api": "^1.1.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.12.0",
