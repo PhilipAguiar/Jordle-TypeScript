@@ -7,7 +7,7 @@ import {Shoe,Guess} from "./types"
 function App() {
  
 
-  const [randShoe, setRandShoe] = useState<Shoe>();
+  const [answerShoe, setAnswerShoe] = useState<Shoe>();
   const [guessList, setGuessList] = useState<Array<Guess>>([]);
   // const [shoeList, setShoeList] = useState<Array<Shoe>>([]);
   const [modelList, setModelList] = useState<Array<string>>([]);
@@ -52,16 +52,16 @@ function App() {
         imageURL: res.data[ranNum].imageURL,
       };
 
-      setRandShoe(newShoe);
+      setAnswerShoe(newShoe);
       console.log(newShoe.model, newShoe.colorway, newShoe.releaseYear);
     });
   }, []);
 
-  const submitHandler = (e: any) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let newGuess: Guess;
 
-    if (correctModelRef.current && correctColorwayRef.current && correctReleaseYearRef.current && randShoe) {
+    if (correctModelRef.current && correctColorwayRef.current && correctReleaseYearRef.current && answerShoe) {
       newGuess = {
         model: correctModelRef.current.value,
         colorway: correctColorwayRef.current.value,
@@ -69,7 +69,7 @@ function App() {
       };
       setGuessList(prevList=>[...prevList,newGuess])
 
-      if (newGuess.model === randShoe.model && newGuess.colorway === randShoe.colorway && newGuess.releaseYear === randShoe.releaseYear) {
+      if (newGuess.model === answerShoe.model && newGuess.colorway === answerShoe.colorway && newGuess.releaseYear === answerShoe.releaseYear) {
         setUserWon(true);
       }
     }
@@ -85,7 +85,7 @@ function App() {
     // }
   };
 
-  if (!randShoe) {
+  if (!answerShoe) {
     return <></>;
   }
 
@@ -95,7 +95,7 @@ function App() {
 
       <h3>Guess the Jordan</h3>
 
-      <img className="App__image" src={randShoe.imageURL} alt="Jordan" />
+      <img className="App__image" src={answerShoe.imageURL} alt="Jordan" />
 
       {userWon && <h1>You Won!</h1>}
       <form onSubmit={(e) => submitHandler(e)}>
@@ -129,7 +129,7 @@ function App() {
       {guessList &&
         guessList.map((guess: Guess) => {
           return (
-            <GuessAttempt guess= {guess}/>
+            <GuessAttempt guess= {guess} answerShoe = {answerShoe}/>
            
           );
         })}

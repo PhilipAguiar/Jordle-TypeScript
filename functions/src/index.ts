@@ -2,7 +2,7 @@
 const functions = require("firebase-functions");
 const fs = require("fs");
 const cors = require("cors");
-const express = require("express");
+import * as express from 'express';
 const SneaksAPI = require("sneaks-api");
 const sneaks = new SneaksAPI();
 
@@ -50,7 +50,7 @@ type Shoe = {
 
 const getShoes = () => JSON.parse(fs.readFileSync("./data/shoes.json"));
 
-app.get("/shoes", (_req: any, res: any) => {
+app.get("/shoes", (_req, res) => {
   const shoes = getShoes();
 
   if (shoes.length === 0) {
