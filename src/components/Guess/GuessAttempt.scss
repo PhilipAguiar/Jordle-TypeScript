@@ -30,6 +30,11 @@
     width: 100%;
     flex: 1.5;
 
+    &--middle {
+      border-left: 2px solid lightgray ;
+      border-right: 2px solid lightgray ;
+    }
+
     &--year {
       flex: 1;
     }

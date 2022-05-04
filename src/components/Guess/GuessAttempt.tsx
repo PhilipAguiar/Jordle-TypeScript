@@ -37,7 +37,7 @@ function GuessAttempt({ guessedShoe, answerShoe }: Props) {
         )}
       </div>
 
-      <div className="guess__field-container">
+      <div className="guess__field-container guess__field-container--middle">
         <h2 className={`guess__heading ${guessedShoe.colorway !== answerShoe.colorway && "guess__heading--wrong"}`}>{guessedShoe.colorway}</h2>
       </div>
 

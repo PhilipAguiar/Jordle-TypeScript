@@ -2,11 +2,9 @@ import "./App.scss";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import GuessAttempt from "./components/Guess/GuessAttempt";
-import {Shoe,Guess} from "./types"
+import { Shoe, Guess } from "./types";
 
 function App() {
- 
-
   const [answerShoe, setAnswerShoe] = useState<Shoe>();
   const [guessList, setGuessList] = useState<Array<Guess>>([]);
   // const [shoeList, setShoeList] = useState<Array<Shoe>>([]);
@@ -67,14 +65,12 @@ function App() {
         colorway: correctColorwayRef.current.value,
         releaseYear: parseInt(correctReleaseYearRef.current.value),
       };
-      setGuessList(prevList=>[newGuess,...prevList])
+      setGuessList((prevList) => [newGuess, ...prevList]);
 
       if (newGuess.model === answerShoe.model && newGuess.colorway === answerShoe.colorway && newGuess.releaseYear === answerShoe.releaseYear) {
         setUserWon(true);
       }
     }
-
-
   };
 
   if (!answerShoe) {
@@ -120,10 +116,7 @@ function App() {
 
       {guessList &&
         guessList.map((guessedShoe: Guess) => {
-          return (
-            <GuessAttempt guessedShoe= {guessedShoe} answerShoe = {answerShoe}/>
-           
-          );
+          return <GuessAttempt guessedShoe={guessedShoe} answerShoe={answerShoe} />;
         })}
 
       {/* 
