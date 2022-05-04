@@ -89,7 +89,7 @@ function App() {
         <select ref={correctModelRef}>
           {modelList
             .sort((a: string, b: string) => {
-            return  parseInt(a.replace(/[^0-9]/g,'')) - parseInt(b.replace(/[^0-9]/g,''))
+              return parseInt(a.replace(/[^0-9]/g, "")) - parseInt(b.replace(/[^0-9]/g, ""));
             })
             .map((model) => {
               return <option>{model}</option>;
