@@ -78,40 +78,42 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="main">
       <h1>Jordle</h1>
 
       <h3>Guess the Jordan</h3>
 
-      <img className="App__image" src={answerShoe.imageURL} alt="Jordan" />
+      <img className="main__image" src={answerShoe.imageURL} alt="Jordan" />
 
       {userWon && <h1>You Won!</h1>}
-      <form onSubmit={(e) => submitHandler(e)}>
-        <label>Jordan Model</label>
-        <select ref={correctModelRef}>
-          {modelList
-            .sort((a: string, b: string) => {
-              return parseInt(a.replace(/[^0-9]/g, "")) - parseInt(b.replace(/[^0-9]/g, ""));
-            })
-            .map((model) => {
-              return <option>{model}</option>;
+      <form className="main__form" onSubmit={(e) => submitHandler(e)}>
+        <div className="main__form-wrapper">
+          <label className="main__label">Jordan Model</label>
+          <select className="main__select" ref={correctModelRef}>
+            {modelList
+              .sort((a: string, b: string) => {
+                return parseInt(a.replace(/[^0-9]/g, "")) - parseInt(b.replace(/[^0-9]/g, ""));
+              })
+              .map((model) => {
+                return <option className="main__option">{model}</option>;
+              })}
+          </select>
+
+          <label className="main__label">Colorway:</label>
+          <select className="main__select" ref={correctColorwayRef}>
+            {colorwayList.sort().map((colorway) => {
+              return <option>{colorway}</option>;
             })}
-        </select>
+          </select>
 
-        <label>Colorway:</label>
-        <select ref={correctColorwayRef}>
-          {colorwayList.sort().map((colorway) => {
-            return <option>{colorway}</option>;
-          })}
-        </select>
-
-        <label>Release Year:</label>
-        <select ref={correctReleaseYearRef}>
-          {releaseYearList.sort().map((releaseYear) => {
-            return <option>{releaseYear}</option>;
-          })}
-        </select>
-        <button>Click</button>
+          <label className="main__label">Release Year:</label>
+          <select className="main__select" ref={correctReleaseYearRef}>
+            {releaseYearList.sort().map((releaseYear) => {
+              return <option>{releaseYear}</option>;
+            })}
+          </select>
+        </div>
+        <button className="main__button">Guess</button>
       </form>
 
       {guessList &&

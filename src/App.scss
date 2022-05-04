@@ -1,8 +1,69 @@
-.App {
+.main {
   text-align: center;
-  &__image{
+  max-width: 1000px;
+  margin: auto;
+
+  &__form {
+    width: 100%;
+  }
+
+  &__form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__image {
     height: 500px;
   }
+
+  &__label {
+    padding-right: 1rem;
+  }
+
+  &__select {
+    padding: 1rem .25rem;
+    margin: 0 .4rem;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  &__button {
+    font-size: 1.8rem;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 1rem 0 0;
+    width: 100%;
+
+    background-color: #222;
+    border-radius: 4px;
+    border-style: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+
+    max-width: none;
+    min-height: 44px;
+    min-width: 10px;
+    outline: none;
+    overflow: hidden;
+    padding: 9px 20px 8px;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+
+    &:hover {
+      opacity: .75;
+    }
+  }
+
+
 }
-
-
