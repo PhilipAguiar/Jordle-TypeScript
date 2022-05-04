@@ -1,15 +1,14 @@
 import "./App.scss";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import GuessAttempt from "./components/Guess/GuessAttempt";
+import {Shoe,Guess} from "./types"
 
 function App() {
-  type Shoe = {
-    model: string;
-    colorway: string;
-    releaseYear: number;
-    imageURL: string;
-  };
+ 
+
   const [randShoe, setRandShoe] = useState<Shoe>();
+  const [guessList, setGuessList] = useState<Array<Guess>>([]);
   // const [shoeList, setShoeList] = useState<Array<Shoe>>([]);
   const [modelList, setModelList] = useState<Array<string>>([]);
   const [colorwayList, setColorwayList] = useState<Array<string>>([]);
@@ -60,15 +59,30 @@ function App() {
 
   const submitHandler = (e: any) => {
     e.preventDefault();
-    if (randShoe && correctReleaseYearRef.current?.value) {
-      if (
-        correctModelRef.current?.value.localeCompare(randShoe.model) === 0 &&
-        correctColorwayRef.current?.value.localeCompare(randShoe.colorway) === 0 &&
-        parseInt(correctReleaseYearRef.current.value) === randShoe.releaseYear
-      ) {
+    let newGuess: Guess;
+
+    if (correctModelRef.current && correctColorwayRef.current && correctReleaseYearRef.current && randShoe) {
+      newGuess = {
+        model: correctModelRef.current.value,
+        colorway: correctColorwayRef.current.value,
+        releaseYear: parseInt(correctReleaseYearRef.current.value),
+      };
+      setGuessList(prevList=>[...prevList,newGuess])
+
+      if (newGuess.model === randShoe.model && newGuess.colorway === randShoe.colorway && newGuess.releaseYear === randShoe.releaseYear) {
         setUserWon(true);
       }
     }
+
+    // if (randShoe && correctReleaseYearRef.current?.value) {
+    //   if (
+    //     correctModelRef.current?.value.localeCompare(randShoe.model) === 0 &&
+    //     correctColorwayRef.current?.value.localeCompare(randShoe.colorway) === 0 &&
+    //     parseInt(correctReleaseYearRef.current.value) === randShoe.releaseYear
+    //   ) {
+    //     setUserWon(true);
+    //   }
+    // }
   };
 
   if (!randShoe) {
@@ -111,6 +125,14 @@ function App() {
         </select>
         <button>Click</button>
       </form>
+
+      {guessList &&
+        guessList.map((guess: Guess) => {
+          return (
+            <GuessAttempt guess= {guess}/>
+           
+          );
+        })}
 
       {/* 
 
