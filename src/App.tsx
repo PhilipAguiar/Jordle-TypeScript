@@ -20,14 +20,13 @@ function App() {
   const correctReleaseYearRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5010/shoes").then((res) => {
-      console.log(res)
+    axios.get("https://jordle-game.web.app/shoes").then((res) => {
+      console.log(res);
       let newModelList: string[] = [];
       let newColorwayList: string[] = [];
       let newReleaseYearList: number[] = [];
 
       res.data.forEach((shoe: Shoe) => {
-        
         if (!newModelList.includes(shoe.model)) {
           newModelList.push(shoe.model);
         }
@@ -46,7 +45,6 @@ function App() {
       setReleaseYearList(newReleaseYearList);
 
       let ranNum: number = Math.floor(Math.random() * res.data.length);
-     
 
       let newShoe: Shoe = {
         model: res.data[ranNum].model,
@@ -56,7 +54,7 @@ function App() {
       };
 
       setRandShoe(newShoe);
-      console.log(newShoe.model,newShoe.colorway,newShoe.releaseYear)
+      console.log(newShoe.model, newShoe.colorway, newShoe.releaseYear);
     });
   }, []);
 
@@ -89,9 +87,13 @@ function App() {
       <form onSubmit={(e) => submitHandler(e)}>
         <label>Jordan Model</label>
         <select ref={correctModelRef}>
-          {modelList.sort().map((model) => {
-            return <option>{model}</option>;
-          })}
+          {modelList
+            .sort((a: string, b: string) => {
+            return  parseInt(a.replace(/[^0-9]/g,'')) - parseInt(b.replace(/[^0-9]/g,''))
+            })
+            .map((model) => {
+              return <option>{model}</option>;
+            })}
         </select>
 
         <label>Colorway:</label>
@@ -110,8 +112,7 @@ function App() {
         <button>Click</button>
       </form>
 
-    
-{/* 
+      {/* 
 
 
       <h2>{randShoe.model}</h2>
