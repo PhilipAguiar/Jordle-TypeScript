@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import GuessAttempt from "./components/Guess/GuessAttempt";
 import { Shoe, Guess } from "./types";
+import HowToPlay from "./components/HowToPlay/HowToPlay";
 
 function App() {
   const [answerShoe, setAnswerShoe] = useState<Shoe>();
@@ -11,9 +12,12 @@ function App() {
   const [colorwayList, setColorwayList] = useState<Array<string>>([]);
   const [releaseYearList, setReleaseYearList] = useState<Array<number>>([]);
   const [userWon, setUserWon] = useState<boolean>(false);
+  const [howToPlayActive, setHowToPlayActive] = useState<boolean>(false);
+
   const correctModelRef = useRef<HTMLSelectElement>(null);
   const correctColorwayRef = useRef<HTMLSelectElement>(null);
   const correctReleaseYearRef = useRef<HTMLSelectElement>(null);
+
   useEffect(() => {
     axios.get("http://localhost:5010/shoes/random").then((res) => {
       setAnswerShoe(res.data);
@@ -29,6 +33,10 @@ function App() {
       setReleaseYearList(res.data);
     });
   }, []);
+
+  const removeHowTo = () => {
+    setHowToPlayActive(false);
+  };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,7 +55,6 @@ function App() {
       if (newGuess.model === answerShoe.model && newGuess.colorway === answerShoe.colorway && newGuess.releaseYear === answerShoe.releaseYear) {
         setUserWon(true);
       }
-
     }
   };
 
@@ -57,9 +64,18 @@ function App() {
 
   return (
     <div className="main">
+      {howToPlayActive && <HowToPlay clickHandler={removeHowTo} />}
       <h1>Jordle</h1>
 
       <h3>Guess the Jordan</h3>
+
+      <h5 className="main__how-to"
+        onClick={() => {
+          setHowToPlayActive(true);
+        }}
+      >
+        How to Play?
+      </h5>
 
       <img className="main__image" src={answerShoe.imageURL} alt="Jordan" />
 
@@ -96,10 +112,8 @@ function App() {
       </form>
 
       {guessList &&
-        guessList.map((guessedShoe: Guess,index:number) => {
-          
-          return <GuessAttempt guessedShoe={guessedShoe} answerShoe={answerShoe}
-          attemptCounter = {guessList.length-index} />;
+        guessList.map((guessedShoe: Guess, index: number) => {
+          return <GuessAttempt guessedShoe={guessedShoe} answerShoe={answerShoe} attemptCounter={guessList.length - index} />;
         })}
 
       {/* 
