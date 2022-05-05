@@ -7,7 +7,6 @@ import { Shoe, Guess } from "./types";
 function App() {
   const [answerShoe, setAnswerShoe] = useState<Shoe>();
   const [guessList, setGuessList] = useState<Array<Guess>>([]);
-  // const [shoeList, setShoeList] = useState<Array<Shoe>>([]);
   const [modelList, setModelList] = useState<Array<string>>([]);
   const [colorwayList, setColorwayList] = useState<Array<string>>([]);
   const [releaseYearList, setReleaseYearList] = useState<Array<number>>([]);
@@ -17,41 +16,19 @@ function App() {
   const correctReleaseYearRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
-    axios.get("https://jordle-game.web.app/shoes").then((res) => {
-      console.log(res);
-      let newModelList: string[] = [];
-      let newColorwayList: string[] = [];
-      let newReleaseYearList: number[] = [];
+    axios.get("http://jordle-game.web.app/shoes/random").then((res) => {
+      console.log(res)
+      setAnswerShoe(res.data);
+    });
 
-      res.data.forEach((shoe: Shoe) => {
-        if (!newModelList.includes(shoe.model)) {
-          newModelList.push(shoe.model);
-        }
-
-        if (!newColorwayList.includes(shoe.colorway)) {
-          newColorwayList.push(shoe.colorway);
-        }
-
-        if (!newReleaseYearList.includes(shoe.releaseYear)) {
-          newReleaseYearList.push(shoe.releaseYear);
-        }
-      });
-
-      setModelList(newModelList);
-      setColorwayList(newColorwayList);
-      setReleaseYearList(newReleaseYearList);
-
-      let ranNum: number = Math.floor(Math.random() * res.data.length);
-
-      let newShoe: Shoe = {
-        model: res.data[ranNum].model,
-        colorway: res.data[ranNum].colorway,
-        releaseYear: res.data[ranNum].releaseYear,
-        imageURL: res.data[ranNum].imageURL,
-      };
-
-      setAnswerShoe(newShoe);
-      console.log(newShoe.model, newShoe.colorway, newShoe.releaseYear);
+    axios.get("http://jordle-game.web.app/shoes/models").then((res) => {
+      setModelList(res.data);
+    });
+    axios.get("http://jordle-game.web.app/shoes/colorways").then((res) => {
+      setColorwayList(res.data);
+    });
+    axios.get("http://jordle-game.web.app/shoes/years").then((res) => {
+      setReleaseYearList(res.data);
     });
   }, []);
 
@@ -88,7 +65,7 @@ function App() {
       {userWon && <h1>You Won!</h1>}
       <form className="main__form" onSubmit={(e) => submitHandler(e)}>
         <div className="main__form-wrapper">
-          <label className="main__label">Jordan Model</label>
+          <label className="main__label">Jordan Model:</label>
           <select className="main__select" ref={correctModelRef}>
             {modelList
               .sort((a: string, b: string) => {
