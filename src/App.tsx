@@ -19,17 +19,17 @@ function App() {
   const correctReleaseYearRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5010/shoes/random").then((res) => {
+    axios.get("https://jordle-game.web.app/shoes/random").then((res) => {
       setAnswerShoe(res.data);
     });
 
-    axios.get("http://localhost:5010/shoes/models").then((res) => {
+    axios.get("https://jordle-game.web.app/shoes/models").then((res) => {
       setModelList(res.data);
     });
-    axios.get("http://localhost:5010/shoes/colorways").then((res) => {
+    axios.get("https://jordle-game.web.app/shoes/colorways").then((res) => {
       setColorwayList(res.data);
     });
-    axios.get("http://localhost:5010/shoes/years").then((res) => {
+    axios.get("https://jordle-game.web.app/shoes/years").then((res) => {
       setReleaseYearList(res.data);
     });
   }, []);
