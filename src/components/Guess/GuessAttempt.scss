@@ -14,12 +14,20 @@
     flex-direction: row;
   }
 
-  &__heading {
+  &__header{
+    padding-top: .5rem ;
+    // border-bottom: 2px solid lightgray;
+  }
+
+  &__text {
     margin: 0;
     color: rgb(33, 186, 33);
 
     &--wrong {
       color: red;
+    }
+    &--close {
+      color: rgb(255, 206, 12);
     }
   }
 
