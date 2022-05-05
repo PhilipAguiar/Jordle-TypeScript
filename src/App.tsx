@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import GuessAttempt from "./components/Guess/GuessAttempt";
 import { Shoe, Guess } from "./types";
 import HowToPlay from "./components/HowToPlay/HowToPlay";
+import jordanLogo from "./assets/Jordan.png";
 
 function App() {
   const [answerShoe, setAnswerShoe] = useState<Shoe>();
@@ -65,11 +66,15 @@ function App() {
   return (
     <div className="main">
       {howToPlayActive && <HowToPlay clickHandler={removeHowTo} />}
-      <h1>Jordle</h1>
-
+      <div className="main__title-wrapper">
+        
+        <h1>Jordle</h1>
+        <img className="main__logo" src={jordanLogo} />
+      </div>
       <h3>Guess the Jordan</h3>
 
-      <h5 className="main__how-to"
+      <h5
+        className="main__how-to"
         onClick={() => {
           setHowToPlayActive(true);
         }}
