@@ -65,6 +65,7 @@
     line-height: 1.5;
 
     max-width: none;
+    margin-bottom: 1rem;
     min-height: 44px;
     min-width: 10px;
     outline: none;
@@ -87,14 +88,15 @@
     cursor: pointer;
     color: blue
   }
-  &__title-wrapper{
+
+  &__title-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-bottom: .3rem;
   }
 
-  &__logo{
-   height: 2.2rem;
+  &__logo {
+    height: 2.2rem;
   }
 }

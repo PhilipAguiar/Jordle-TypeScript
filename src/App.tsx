@@ -72,7 +72,7 @@ function App() {
         <img className="main__logo" src={jordanLogo} />
       </div>
       <h3>Guess the Jordan</h3>
-
+    
       <h5
         className="main__how-to"
         onClick={() => {
