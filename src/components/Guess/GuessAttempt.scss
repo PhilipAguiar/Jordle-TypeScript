@@ -22,7 +22,8 @@
   &__text {
     margin: 0;
     color: rgb(33, 186, 33);
-
+    font-size: 1.3rem;
+    
     &--wrong {
       color: red;
     }
@@ -45,7 +46,8 @@
     width: 100%;
     flex: 1.5;
     padding: .5rem 0;
-
+    
+    
     @include tablet {
       padding: 0;
     }
