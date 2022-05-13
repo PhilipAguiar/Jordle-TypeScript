@@ -5,6 +5,8 @@ export type Shoe = {
   imageURL: string;
 };
 
+export type AnswerShoe = Shoe & { description: string };
+
 export type Guess = {
   model: string;
   colorway: string;

@@ -16,6 +16,7 @@ type Shoe = {
   colorway: string;
   releaseYear: number;
   imageURL: string;
+  description: string;
 };
 
 const modelList: string[] = [];
@@ -26,10 +27,11 @@ const releaseYearList: number[] = [];
 // let modelNumber: number = 1;
 
 // for (let i = modelNumber; i <= 26; i++) {
-//   sneaks.getProducts(`Jordan ${i}`, 30, function (err: unknown, products: any) {
+//   sneaks.getProducts(`Jordan ${i}`, 100, function (err: unknown, products: any) {
 //     if (products) {
 //       products.forEach((product: any) => {
-//         if(product.make && product.releaseDate && product.shoeName && product.thumbnail){
+//         if (product.make && product.releaseDate && product.shoeName && product.thumbnail && product.description) {
+//           console.log(product);
 //           let colorWay: string = product.shoeName.replace(product.make + " ", "");
 //           let releaseYear: number = parseInt(product.releaseDate.split("-")[0]);
 
@@ -38,17 +40,16 @@ const releaseYearList: number[] = [];
 //             colorway: colorWay,
 //             releaseYear: releaseYear,
 //             imageURL: product.thumbnail,
+//             description: product.description,
 //           };
 
 //           if (!shoeList.includes(newShoe) && parseInt(product.make.match(/\d+/g)) === i) {
 //             shoeList.push(newShoe);
 //           }
 //         }
-
 //       });
 //       fs.writeFileSync("../data/shoes.json", JSON.stringify(shoeList));
 //     }
-
 //   });
 // }
 
@@ -74,6 +75,7 @@ app.get("/shoes/random", (_req, res) => {
     colorway: shoes[ranNum].colorway,
     releaseYear: shoes[ranNum].releaseYear,
     imageURL: shoes[ranNum].imageURL,
+    description: shoes[ranNum].description,
   };
   res.status(200).json(newShoe);
 });

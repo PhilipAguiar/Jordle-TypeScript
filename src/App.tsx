@@ -2,12 +2,13 @@ import "./App.scss";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import GuessAttempt from "./components/Guess/GuessAttempt";
-import { Shoe, Guess } from "./types";
+import { Shoe, AnswerShoe, Guess } from "./types";
 import HowToPlay from "./components/HowToPlay/HowToPlay";
 import jordanLogo from "./assets/Jordan.png";
+import LoseScreen from "./components/LoseScreen/LoseScreen";
 
 function App() {
-  const [answerShoe, setAnswerShoe] = useState<Shoe>();
+  const [answerShoe, setAnswerShoe] = useState<AnswerShoe>();
   const [guessList, setGuessList] = useState<Array<Guess>>([]);
   const [modelList, setModelList] = useState<Array<string>>([]);
   const [colorwayList, setColorwayList] = useState<Array<string>>([]);
@@ -22,6 +23,7 @@ function App() {
   useEffect(() => {
     axios.get("https://jordle-game.web.app/shoes/random").then((res) => {
       setAnswerShoe(res.data);
+      console.log(res.data);
     });
 
     axios.get("https://jordle-game.web.app/shoes/models").then((res) => {
@@ -67,12 +69,11 @@ function App() {
     <div className="main">
       {howToPlayActive && <HowToPlay clickHandler={removeHowTo} />}
       <div className="main__title-wrapper">
-        
         <h1>Jordle</h1>
         <img className="main__logo" src={jordanLogo} />
       </div>
       <h3>Guess the Jordan</h3>
-    
+
       <h5
         className="main__how-to"
         onClick={() => {
@@ -84,7 +85,10 @@ function App() {
 
       <img className="main__image" src={answerShoe.imageURL} alt="Jordan" />
 
+      {guessList.length === 6 && <LoseScreen answerShoe={answerShoe} />}
+
       {userWon && <h1>You Won!</h1>}
+
       <form className="main__form" onSubmit={(e) => submitHandler(e)}>
         <div className="main__form-wrapper">
           <label className="main__label">Jordan Model:</label>
@@ -120,13 +124,6 @@ function App() {
         guessList.map((guessedShoe: Guess, index: number) => {
           return <GuessAttempt guessedShoe={guessedShoe} answerShoe={answerShoe} attemptCounter={guessList.length - index} />;
         })}
-
-      {/* 
-
-
-      <h2>{randShoe.model}</h2>
-      <h2>{randShoe.colorway}</h2>
-      <h2>{randShoe.releaseYear}</h2> */}
     </div>
   );
 }

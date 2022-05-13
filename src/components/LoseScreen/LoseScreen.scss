@@ -1,0 +1,15 @@
+.lose {
+  padding: 1rem 0;
+
+  &__subheading {
+    padding: .5rem;
+  }
+
+  &__answer {
+    padding: 1rem;
+  }
+
+  &__description {
+    padding-bottom: 1rem;
+  }
+}
