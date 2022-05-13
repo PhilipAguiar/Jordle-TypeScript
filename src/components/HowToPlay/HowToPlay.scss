@@ -8,7 +8,7 @@
   padding-top: 2rem;
   overflow-y: scroll;
   position: absolute;
-  height: 80%;
+  height: 60%;
   width: 80%;
   top: 10%;
   left: 10%;
@@ -22,9 +22,8 @@
     left: 30%;
   }
 
-  &__text-container {
-    
- 
+  &__title {
+    padding-bottom: 1rem;
   }
 
   &__text {

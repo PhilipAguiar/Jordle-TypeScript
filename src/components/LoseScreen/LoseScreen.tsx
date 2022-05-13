@@ -1,5 +1,5 @@
 import "./LoseScreen.scss";
-import { AnswerShoe, Shoe } from "../../types";
+import { AnswerShoe } from "../../types";
 type Props = {
   answerShoe: AnswerShoe;
 };

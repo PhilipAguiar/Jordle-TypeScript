@@ -1,5 +1,8 @@
 .lose {
-  padding: 1rem 0;
+  border: 2px solid black;
+  padding: 1rem 1.5rem 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
 
   &__subheading {
     padding: .5rem;
